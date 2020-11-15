@@ -172,20 +172,6 @@ function Leona.Auto()
             end
         end
     end 
-    local points = {}
-    local autoR = Menu.Get("Misc.AutoR")
-    for k, rTarget in ipairs(TS:GetTargets(spells.R.Range, true)) do        
-        local pred = spells.R:GetPrediction(rTarget)
-        if pred and pred.HitChanceEnum >= Enums.HitChance.High then
-            insert(points, pred.CastPosition)
-        end
-    end
-    if autoR then
-        local bestPos, hitCount = spells.R:GetBestCircularCastPos(points)
-        if hitCount >= Menu.Get("Misc.AutoR") then
-            spells.R:Cast(bestPos)
-        end
-    end
 end
 
 function Leona.Combo()  Leona.ComboLogic("Combo")  end
@@ -218,7 +204,6 @@ function Leona.LoadMenu()
         Menu.ColoredText("Misc Options", 0xFFD700FF, true)      
         Menu.Checkbox("Misc.IntE", "Use [E] Interrupt", true)   
         Menu.Checkbox("Misc.IntR", "Use [R] Interrupt", false)       
-        Menu.Slider("Misc.AutoR", "Auto [R] If Hit X", 3, 2, 5)
         Menu.Keybind("Misc.ForceR", "Force [R] Key", string.byte('T'))
         Menu.Separator()
 
